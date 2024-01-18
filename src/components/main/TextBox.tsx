@@ -8,15 +8,27 @@ interface TextBoxProps {
   onChangeText: (text: string) => void;
   onBlur?: () => void;
   maxLength?: number;
+  width?: number | string;
+  height?: number | string;
+  multiline?: boolean;
+  textAlingVertical?: 'top' | 'center' | 'bottom';
+  keyboardType?:
+    | 'default'
+    | 'number-pad'
+    | 'decimal-pad'
+    | 'numeric'
+    | 'email-address'
+    | 'phone-pad';
 }
-
-const {width} = Dimensions.get('window');
 
 const TextBox = (props: TextBoxProps) => {
   return (
     <TextInput
-      style={styles.container}
+      keyboardType={props.keyboardType}
+      style={styles.container({width: props.width, height: props.height})}
       {...props}
+      multiline
+      textAlignVertical={props.textAlingVertical}
       placeholderTextColor="gray"
       cursorColor="black"
     />
@@ -26,9 +38,9 @@ const TextBox = (props: TextBoxProps) => {
 export default TextBox;
 
 const styles = StyleSheet.create({
-  container: {
+  container: ({width, height}: string) => ({
     borderWidth: 2,
-    height: getHeightPercentage(0.06),
+    height: height ? height : getHeightPercentage(0.06),
     borderColor: 'black',
     borderRadius: getWidthPercentage(0.02),
     paddingHorizontal: getWidthPercentage(0.04),
@@ -36,6 +48,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontFamily: 'Montserrat-SemiBold',
     fontSize: getWidthPercentage(0.03),
-    width: getWidthPercentage(0.8),
-  },
+    width: width ? width : getWidthPercentage(0.9),
+  }),
 });

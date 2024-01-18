@@ -16,7 +16,7 @@ const Button = (props: ButtonProps) => {
     <TouchableOpacity
       {...props}
       activeOpacity={props.activeOpacity || 0.8}
-      style={styles.container}>
+      style={props.disabled ? styles.disable : styles.container}>
       <Text style={styles.title}>{props.title}</Text>
     </TouchableOpacity>
   );
@@ -29,6 +29,15 @@ const styles = StyleSheet.create({
     width: width * 0.6,
     height: height * 0.06,
     backgroundColor: COLORS.blue,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: width * 1,
+    marginVertical: height * 0.02,
+  },
+  disable: {
+    width: width * 0.6,
+    height: height * 0.06,
+    backgroundColor: 'gray',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: width * 1,

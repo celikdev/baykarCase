@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {getData, setData} from './src/utils/AuthHandler';
+import {Storage} from './src/utils/Storage';
 import {HomeStack, AuthStack} from './src/stacks';
+import {useDispatch, useSelector} from 'react-redux';
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getData('isAuth').then(res => {
-      res === 'true' ? setIsAuth(true) : setIsAuth(false);
-    });
+    dispatch({type: 'GET_AUTH_STATUS'});
   }, []);
+
+  const {isAuth} = useSelector((state: any) => state.auth);
 
   return (
     <NavigationContainer>

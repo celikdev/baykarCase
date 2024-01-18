@@ -1,16 +1,33 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {homeRoutes} from '../../Routes';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {HomeIcon} from '../../assets/icons';
+import {getWidthPercentage} from '../../utils/Dimension';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarLabelStyle: {
+          fontFamily: 'Montserrat-SemiBold',
+          fontSize: getWidthPercentage(0.025),
+        },
+        tabBarActiveTintColor: '#202020',
+        tabBarInactiveTintColor: 'gray',
+      }}>
       {homeRoutes.map((route, index) => (
-        <Stack.Screen key={index} {...route} />
+        <Tab.Screen
+          key={index}
+          {...route}
+          options={{
+            tabBarIcon: ({focused}) => <route.iconName focused={focused} />,
+          }}
+        />
       ))}
-    </Stack.Navigator>
+    </Tab.Navigator>
   );
 };
 

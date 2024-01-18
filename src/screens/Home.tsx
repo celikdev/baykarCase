@@ -1,17 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {TextBox} from '../components/main';
+import React from 'react';
+import {getWidthPercentage} from '../utils/Dimension';
 
 const Home = () => {
-  const [name, setName] = useState('');
   return (
     <View style={styles.container}>
-      <TextBox
-        placeholder="Ad"
-        value={name}
-        onChangeText={text => setName(text)}
-      />
-      <Text style={{color: 'black'}}>{name}</Text>
+      <Text style={styles.title}>Anasayfa</Text>
     </View>
   );
 };
@@ -21,5 +15,13 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  title: {
+    fontSize: getWidthPercentage(0.05),
+    fontFamily: 'Montserrat-Bold',
+    color: '#202020',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    marginVertical: getWidthPercentage(0.1),
   },
 });
